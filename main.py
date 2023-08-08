@@ -1,6 +1,7 @@
 from os import listdir
 from flask import Flask , request
 import time
+from requests import options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
@@ -49,7 +50,12 @@ def send_prompts(prompt , driver):
 
 @app.get('/start')
 def start(): 
-    driver = webdriver.Edge()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    driver = webdriver.Chrome(options=options)
     driver.get("https://gpt-gm.h2o.ai/")
     login_btn = driver.find_element(By.XPATH , '//*[@id="app"]/div/div[1]/div/div/div/form/button')
     login_btn.click()
