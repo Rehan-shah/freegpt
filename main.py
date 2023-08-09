@@ -1,7 +1,5 @@
-from os import listdir
 from flask import Flask , request
 import time
-from requests import options
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 
