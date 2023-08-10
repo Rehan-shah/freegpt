@@ -21,4 +21,3 @@ fi
 
 # add your own build commands...
 
-pip install -r ../requirements.txt
