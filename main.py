@@ -104,7 +104,13 @@ def instrcut():
         prompt = data["prompt"]
     except KeyError:
         return {"error": "No prompt provided"}, 400
-    driver = webdriver.Edge()
+    options = webdriver.ChromeOptions()
+    service = Service(ChromeDriverManager().install())
+    options.add_argument("--headless")
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    driver = webdriver.Chrome(options=options , service=service )
     driver.get("https://gpt-gm.h2o.ai/")
     login_btn = driver.find_element(By.XPATH , '//*[@id="app"]/div/div[1]/div/div/div/form/button')
     login_btn.click()
