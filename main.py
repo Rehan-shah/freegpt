@@ -15,18 +15,16 @@ list = {}
 
 def send_prompts(prompt , driver):
     print(prompt)
-    time.sleep(5)
+    time.sleep(3.5)
 
     prompt = prompt.replace("\n", " ")
     textarea = driver.find_element(By.XPATH , '//*[@id="app"]/div[1]/div/div[2]/form/div/div/textarea')
     textarea.send_keys(prompt)
-    time.sleep(5)
     enter_btn = driver.find_element(By.XPATH , '//*[@id="app"]/div[1]/div/div[2]/form/div/button')
     enter_btn.click()
 
-    time.sleep(3)
     while True:
-        time.sleep(2)
+        time.sleep(1.5)
         try : 
             countiune_btn = driver.find_element(By.XPATH ,'//*[@id="app"]/div[1]/div/div[2]/div[1]/button')
             countiune_btn.text
