@@ -1,10 +1,13 @@
 from flask import Flask , request
 import time
+from selenium.webdriver.common import service
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-
 from selenium.webdriver.common.keys import Keys
 import pyperclip
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+
 app = Flask(__name__)
 import uuid
 
@@ -49,11 +52,12 @@ def send_prompts(prompt , driver):
 @app.get('/start')
 def start(): 
     options = webdriver.ChromeOptions()
+    service = Service(ChromeDriverManager().install())
     options.add_argument("--headless")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options , service=service)
     driver.get("https://gpt-gm.h2o.ai/")
     login_btn = driver.find_element(By.XPATH , '//*[@id="app"]/div/div[1]/div/div/div/form/button')
     login_btn.click()
