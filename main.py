@@ -4,7 +4,6 @@ from selenium.webdriver.common import service
 from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-import pyperclip
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
@@ -18,9 +17,9 @@ def send_prompts(prompt , driver):
     print(prompt)
     time.sleep(5)
 
-    pyperclip.copy(prompt)
+    prompt = prompt.replace("\n", " ")
     textarea = driver.find_element(By.XPATH , '//*[@id="app"]/div[1]/div/div[2]/form/div/div/textarea')
-    textarea.send_keys(Keys.COMMAND + "v")
+    textarea.send_keys(prompt)
     time.sleep(5)
     enter_btn = driver.find_element(By.XPATH , '//*[@id="app"]/div[1]/div/div[2]/form/div/button')
     enter_btn.click()

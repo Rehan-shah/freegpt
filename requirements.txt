@@ -18,7 +18,6 @@ numpy
 outcome
 packaging
 psutil
-pyperclip
 PySocks
 PyYAML
 selenium
